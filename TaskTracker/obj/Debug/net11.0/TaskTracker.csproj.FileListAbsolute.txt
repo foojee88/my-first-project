@@ -1,0 +1,17 @@
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\TaskTracker.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\TaskTracker.AssemblyInfoInputs.cache
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\TaskTracker.AssemblyInfo.cs
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\TaskTracker.csproj.CoreCompileInputs.cache
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\TaskTracker.sourcelink.json
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\bin\Debug\net11.0\TaskTracker.exe
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\bin\Debug\net11.0\TaskTracker.deps.json
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\bin\Debug\net11.0\TaskTracker.runtimeconfig.json
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\bin\Debug\net11.0\TaskTracker.runtimeconfig.dev.json
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\bin\Debug\net11.0\TaskTracker.dll
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\bin\Debug\net11.0\TaskTracker.pdb
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\TaskTracker.dll
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\refint\TaskTracker.dll
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\TaskTracker.pdb
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\TaskTracker.genruntimeconfig.cache
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\ref\TaskTracker.dll
+C:\Users\voong\OneDrive\Documents\myfirstproject\my-first-project-1\TaskTracker\obj\Debug\net11.0\TaskTrac.2CCAFB19.Up2Date

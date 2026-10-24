@@ -13,69 +13,82 @@ public class TaskItem
     public string Priority { get; set; } = "Normal";
     public bool IsCompleted { get; set; } = false;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-    public override string ToString()
-    {
-        string status = IsCompleted ? "[✓ DONE]" : "[PENDING]";
-        return $"{status} ({Priority}) - {Title}";
-    }
 }
 
-public class MainForm : Form
+class Program
 {
-    private List<TaskItem> tasks = new();
-    private ListBox taskListBox = new();
-    private TextBox titleInput = new();
-    private ComboBox priorityInput = new();
-    private Button addButton = new();
-    private Button toggleButton = new();
-    private Button deleteButton = new();
-    private string filePath = "tasks.json";
+    private static readonly string FilePath = "tasks.json";
+    private static List<TaskItem> tasks = new List<TaskItem>();
 
-    public MainForm()
+    static void Main(string[] args)
     {
-        Text = "Task Tracker Desktop";
-        Width = 520;
-        Height = 550;
-        StartPosition = FormStartPosition.CenterScreen;
+        LoadTasksFromFile();
 
-        // Title Label & Box
-        Label titleLabel = new() { Text = "Task Title:", Left = 20, Top = 20, Width = 80 };
-        titleInput = new() { Left = 110, Top = 18, Width = 230 };
+        while (true)
+        {
+            Console.Clear();
+            DisplayHeader();
+            DisplayTasks();
 
-        // Priority Dropdown
-        priorityInput = new() { Left = 350, Top = 18, Width = 130, DropDownStyle = ComboBoxStyle.DropDownList };
-        priorityInput.Items.AddRange(new string[] { "High", "Medium", "Low" });
-        priorityInput.SelectedIndex = 1;
+            Console.WriteLine("\n[1] Add Task");
+            Console.WriteLine("[2] Toggle Complete / Incomplete");
+            Console.WriteLine("[3] Delete Task");
+            Console.WriteLine("[4] Save & Exit");
+            Console.Write("\nSelect an option: ");
 
-        // Add Button
-        addButton = new() { Text = "Add Task", Left = 110, Top = 55, Width = 110, Height = 32 };
-        addButton.Click += (s, e) => AddTask();
+            string? choice = Console.ReadLine()?.Trim();
 
-        // Task List View
-        taskListBox = new() { Left = 20, Top = 100, Width = 460, Height = 320, Font = new Font("Segoe UI", 10) };
-
-        // Action Buttons
-        toggleButton = new() { Text = "Toggle Complete", Left = 20, Top = 440, Width = 140, Height = 35 };
-        toggleButton.Click += (s, e) => ToggleTask();
-
-        deleteButton = new() { Text = "Delete Selected", Left = 180, Top = 440, Width = 140, Height = 35 };
-        deleteButton.Click += (s, e) => DeleteTask();
-
-        // Add controls to the Form
-        Controls.Add(titleLabel);
-        Controls.Add(titleInput);
-        Controls.Add(priorityInput);
-        Controls.Add(addButton);
-        Controls.Add(taskListBox);
-        Controls.Add(toggleButton);
-        Controls.Add(deleteButton);
-
-        LoadTasks();
-        RefreshList();
+            switch (choice)
+            {
+                case "1":
+                    AddTask();
+                    break;
+                case "2":
+                    ToggleTask();
+                    break;
+                case "3":
+                    DeleteTask();
+                    break;
+                case "4":
+                    SaveTasksToFile();
+                    Console.WriteLine("\nTasks saved successfully. Goodbye!");
+                    return;
+                default:
+                    PauseMessage("Invalid selection. Press any key to try again...");
+                    break;
+            }
+        }
     }
 
-    private void AddTask()
+    static void DisplayHeader()
+    {
+        Console.WriteLine("==============================================================");
+        Console.WriteLine("                 ADVANCED TASK MANAGER                        ");
+        Console.WriteLine("==============================================================");
+    }
+
+    static void DisplayTasks()
+    {
+        if (tasks.Count == 0)
+        {
+            Console.WriteLine("  No tasks found. Press [1] to add your first task.");
+            return;
+        }
+
+        Console.WriteLine($" {"#",-3} | {"Status",-8} | {"Priority",-8} | {"Date Added",-12} | Title");
+        Console.WriteLine(new string('-', 62));
+
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            var task = tasks[i];
+            string status = task.IsCompleted ? "[DONE]" : "[TODO]";
+            string dateStr = task.CreatedAt.ToString("yyyy-MM-dd");
+
+            Console.WriteLine($" {i + 1,-3} | {status,-8} | {task.Priority,-8} | {dateStr,-12} | {task.Title}");
+        }
+    }
+
+    static void AddTask()
     {
         if (string.IsNullOrWhiteSpace(titleInput.Text))
         {

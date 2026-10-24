@@ -71,16 +71,77 @@ class Program
             return;
         }
 
-        Console.WriteLine($" {"#",-3} | {"Status",-8} | {"Priority",-8} | {"Date Added",-12} | Title");
-        Console.WriteLine(new string('-', 62));
+        // --- Summary Stats ---
+        int completedCount = tasks.Count(t => t.IsCompleted);
+        int pendingCount = tasks.Count - completedCount;
+
+        Console.Write("  Summary: ");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write($"Total: {tasks.Count} | ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write($"Pending: {pendingCount} | ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"Done: {completedCount}");
+        Console.ResetColor();
+        Console.WriteLine();
+
+        // --- Table Header ---
+        Console.WriteLine($" {"#",-3} | {"Status",-12} | {"Priority",-10} | {"Date Added",-12} | Title");
+        Console.WriteLine(new string('-', 72));
 
         for (int i = 0; i < tasks.Count; i++)
         {
             var task = tasks[i];
-            string status = task.IsCompleted ? "[DONE]" : "[TODO]";
-            string dateStr = task.CreatedAt.ToString("yyyy-MM-dd");
 
-            Console.WriteLine($" {i + 1,-3} | {status,-8} | {task.Priority,-8} | {dateStr,-12} | {task.Title}");
+            // Number
+            Console.Write($" {i + 1,-3} | ");
+
+            // Status Badge
+            if (task.IsCompleted)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("[✓ DONE]    ");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("[  PENDING ]");
+            }
+            Console.ResetColor();
+
+            // Colored Priority Badge
+            Console.Write(" | ");
+            switch (task.Priority.ToLower())
+            {
+                case "high":
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case "medium":
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    break;
+                case "low":
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+            }
+            Console.Write($"{task.Priority,-10}");
+            Console.ResetColor();
+
+            // Date & Title
+            Console.Write($" | {task.CreatedAt:yyyy-MM-dd} | ");
+
+            if (task.IsCompleted)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine($"{task.Title} (Completed)");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine(task.Title);
+            }
         }
     }
 
